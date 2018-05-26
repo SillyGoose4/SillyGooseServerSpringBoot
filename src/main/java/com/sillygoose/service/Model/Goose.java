@@ -6,7 +6,7 @@ public class Goose {
     }
     public Goose(int userId,
                  int gooseDevil,
-                 int gooseSnow,
+                 int gooseCloud,
                  int gooseEny,
                  int gooseMap,
                  int gooseRain,
@@ -17,7 +17,7 @@ public class Goose {
         this.gooseEny = gooseEny;
         this.gooseMap = gooseMap;
         this.gooseRain = gooseRain;
-        this.gooseSnow = gooseSnow;
+        this.gooseCloud = gooseCloud;
         this.gooseStar = gooseStar;
         this.gooseWind = gooseWind;
         this.userId = userId;
@@ -33,7 +33,7 @@ public class Goose {
         this.gooseEny = 0;
         this.gooseMap = 0;
         this.gooseRain = 0;
-        this.gooseSnow = 0;
+        this.gooseCloud = 0;
         this.gooseStar = 0;
         this.gooseWind = 0;
         this.gooseSun = 0;
@@ -46,7 +46,7 @@ public class Goose {
 
     private Integer gooseSun;
 
-    private Integer gooseSnow;
+    private Integer gooseCloud;
 
     private Integer gooseStar;
 
@@ -88,12 +88,12 @@ public class Goose {
         this.gooseSun = gooseSun;
     }
 
-    public Integer getGooseSnow() {
-        return gooseSnow;
+    public Integer getGooseCloud() {
+        return gooseCloud;
     }
 
-    public void setGooseSnow(Integer gooseSnow) {
-        this.gooseSnow = gooseSnow;
+    public void setGooseCloud(Integer gooseCloud) {
+        this.gooseCloud = gooseCloud;
     }
 
     public Integer getGooseStar() {

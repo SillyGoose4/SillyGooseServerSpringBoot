@@ -9,6 +9,16 @@ public class Pic {
 
     private Integer picLevel;
 
+    private String picDescribe;
+
+    public String getPicDescribe() {
+        return picDescribe;
+    }
+
+    public void setPicDescribe(String picDescribe) {
+        this.picDescribe = picDescribe;
+    }
+
     public Integer getPicId() {
         return picId;
     }

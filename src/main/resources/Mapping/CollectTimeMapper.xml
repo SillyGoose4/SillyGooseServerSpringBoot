@@ -2,6 +2,120 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sillygoose.service.Mapper.CollectTimeMapper">
     <resultMap id="CollectTimeResultMap" type="com.sillygoose.service.Model.CollectTime">
-
+        <result column="userId" jdbcType="INTEGER" property="userId" />
+        <result column="gooseSunT" jdbcType="TIMESTAMP" property="sunLasttime" />
+        <result column="gooseCloudT" jdbcType="TIMESTAMP" property="cloudLasttime" />
+        <result column="gooseRainT" jdbcType="TIMESTAMP" property="rainLasttime" />
+        <result column="gooseDevilT" jdbcType="TIMESTAMP" property="devilLasttime" />
+        <result column="gooseWindT" jdbcType="TIMESTAMP" property="windLasttime" />
+        <result column="gooseStarT" jdbcType="TIMESTAMP" property="starLasttime" />
     </resultMap>
+
+    <insert id="insert" parameterType="com.sillygoose.service.Model.CollectTime">
+        insert into tCollectTime(userId, gooseSunT, gooseCloudT, gooseWindT, gooseDevilT, gooseStarT, gooseRainT)
+        values (#{userId,jdbcType=INTEGER}, #{sunLasttime,jdbcType=TIMESTAMP}, #{cloudLasttime,jdbcType=TIMESTAMP},
+        #{rainLasttime,jdbcType=TIMESTAMP}, #{devilLasttime,jdbcType=TIMESTAMP}, #{windLasttime,jdbcType=TIMESTAMP},
+        #{starLasttime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.sillygoose.service.Model.CollectTime">
+        insert into tCollectTime
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                userId,
+            </if>
+            <if test="sunLasttime != null">
+                gooseSunT,
+            </if>
+            <if test="cloudLasttime != null">
+                gooseCloudT,
+            </if>
+            <if test="rainLasttime != null">
+                gooseRainT,
+            </if>
+            <if test="devilLasttime != null">
+                gooseDevilT,
+            </if>
+            <if test="windLasttime != null">
+                gooseWindT,
+            </if>
+            <if test="starLasttime != null">
+                gooseStarT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="sunLasttime != null">
+                #{sunLasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cloudLasttime != null">
+                #{cloudLasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rainLasttime != null">
+                #{rainLasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="devilLasttime != null">
+                #{devilLasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="windLasttime != null">
+                #{windLasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="starLasttime != null">
+                #{starLasttime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="CollectTimeResultMap">
+        select * from tCollectTime where userId = #{userId}
+    </select>
+
+    <!-- 此处有错误
+    <update id="updateByExampleSelective" parameterType="map">
+        update tcollecttime
+        <set>
+            <if test="record.userId != null">
+                userId = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.sunLasttime != null">
+                gooseSunT= #{record.sunLasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.snowLasttime != null">
+                gooseCloudT = #{record.cloudLasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.rainLasttime != null">
+                gooseRainT = #{record.rainLasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.devilLasttime != null">
+                gooseDevilT = #{record.devilLasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.windLasttime != null">
+                gooseWindT = #{record.windLasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.starLasttime != null">
+                gooseStarT = #{record.starLasttime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    -->
+    <update id="updateByExample" parameterType="map">
+        update tCollectTime
+        set userId = #{record.userId,jdbcType=INTEGER},
+        gooseSunT = #{record.sunLasttime,jdbcType=TIMESTAMP},
+        gooseCloudT = #{record.cloudLasttime,jdbcType=TIMESTAMP},
+        gooseRainT = #{record.rainLasttime,jdbcType=TIMESTAMP},
+        gooseDevilT = #{record.devilLasttime,jdbcType=TIMESTAMP},
+        gooseWindT = #{record.windLasttime,jdbcType=TIMESTAMP},
+        gooseStarT = #{record.starLasttime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+
 </mapper>
