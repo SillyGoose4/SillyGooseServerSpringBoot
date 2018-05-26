@@ -29,7 +29,7 @@ public class User {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "userId: "+this.getUserId()+"\n userName:    "+this.getUserName()+"\n userPhone: "+this.getUserPhone()+"\n userPasswd:   "+this.getUserPasswd();
     }
 
     private Integer userId;
@@ -40,7 +40,6 @@ public class User {
 
     private String userPhone;
 
-    private Date createtime;
 
     public Integer getUserId() {
         return userId;
@@ -74,11 +73,4 @@ public class User {
         this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
-    }
-
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
-    }
 }

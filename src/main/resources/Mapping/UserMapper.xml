@@ -20,5 +20,9 @@
         select * from tUser where userId = #{userId}
     </select>
 
+    <select id="selectCountByPhone" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(distinct userPhone) from tUser where userPhone = #{userPhone}
+    </select>
+
 
 </mapper>

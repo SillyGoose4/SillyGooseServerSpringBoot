@@ -12,4 +12,6 @@ public interface UserMapper {
     List<User> selectByPhone(String userPhone);
 
     User selectById(Integer userId);
+
+    int selectCountByPhone(String userPhone);
 }

@@ -15,7 +15,7 @@ public class CollectTime {
     public void InitTime(Date currentDate){
         this.devilLasttime = currentDate;
         this.rainLasttime = currentDate;
-        this.snowLasttime = currentDate;
+        this.cloudLasttime = currentDate;
         this.starLasttime = currentDate;
         this.windLasttime = currentDate;
         this.sunLasttime = currentDate;
@@ -25,7 +25,7 @@ public class CollectTime {
 
     private Date sunLasttime;
 
-    private Date snowLasttime;
+    private Date cloudLasttime;
 
     private Date rainLasttime;
 
@@ -51,12 +51,12 @@ public class CollectTime {
         this.sunLasttime = sunLasttime;
     }
 
-    public Date getSnowLasttime() {
-        return snowLasttime;
+    public Date getCloudLasttime() {
+        return cloudLasttime;
     }
 
-    public void setSnowLasttime(Date snowLasttime) {
-        this.snowLasttime = snowLasttime;
+    public void setCloudLasttime(Date cloudLasttime) {
+        this.cloudLasttime = cloudLasttime;
     }
 
     public Date getRainLasttime() {
