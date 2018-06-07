@@ -15,7 +15,7 @@
 
     <insert id="insert" parameterType="com.sillygoose.service.Model.Goose">
         insert into tGoose(userId,gooseENY,gooseSun,gooseRain,gooseCloud,gooseStar,gooseDevil,gooseWind)
-         VALUES(#{userId},#{gooseENY},#{gooseSun},#{gooseRain},#{gooseCloud},#{gooseStar},#{gooseDevil},#{gooseWind})
+         VALUES(#{userId},#{gooseEny},#{gooseSun},#{gooseRain},#{gooseCloud},#{gooseStar},#{gooseDevil},#{gooseWind})
     </insert>
 
     <insert id="insertSelective" parameterType="com.sillygoose.service.Model.Goose">

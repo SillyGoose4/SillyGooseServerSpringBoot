@@ -2,6 +2,123 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sillygoose.service.Mapper.GooseMapper">
     <resultMap id="GooseResultMap" type="com.sillygoose.service.Model.Goose">
-
+        <id column="userId" jdbcType="INTEGER" property="userId" />
+        <result column="gooseENY" jdbcType="INTEGER" property="gooseEny" />
+        <result column="gooseMap" jdbcType="INTEGER" property="gooseMap" />
+        <result column="gooseSun" jdbcType="INTEGER" property="gooseSun" />
+        <result column="gooseCloud" jdbcType="INTEGER" property="gooseCloud" />
+        <result column="gooseStar" jdbcType="INTEGER" property="gooseStar" />
+        <result column="gooseWind" jdbcType="INTEGER" property="gooseWind" />
+        <result column="gooseRain" jdbcType="INTEGER" property="gooseRain" />
+        <result column="gooseDevil" jdbcType="INTEGER" property="gooseDevil" />
     </resultMap>
+
+    <insert id="insert" parameterType="com.sillygoose.service.Model.Goose">
+        insert into tGoose(userId,gooseENY,gooseSun,gooseRain,gooseCloud,gooseStar,gooseDevil,gooseWind)
+         VALUES(#{userId},#{gooseEny},#{gooseSun},#{gooseRain},#{gooseCloud},#{gooseStar},#{gooseDevil},#{gooseWind})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.sillygoose.service.Model.Goose">
+        insert into tGoose
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                userId,
+            </if>
+            <if test="gooseEny != null">
+                gooseENY,
+            </if>
+            <if test="gooseSun != null">
+                gooseSun,
+            </if>
+            <if test="gooseCloud != null">
+                gooseCloud,
+            </if>
+            <if test="gooseWind != null">
+                gooseWind,
+            </if>
+            <if test="gooseStar != null">
+                gooseStar,
+            </if>
+            <if test="gooseDevil != null">
+                gooseDevil,
+            </if>
+            <if test="gooseRain != null">
+                gooseRain,
+            </if>
+            <if test="gooseMap != null">
+                gooseMap,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="gooseEny != null">
+                #{gooseEny,jdbcType=INTEGER},
+            </if>
+            <if test="gooseSun != null">
+                #{gooseSun,jdbcType=INTEGER},
+            </if>
+            <if test="gooseCloud != null">
+                #{gooseCloud,jdbcType=INTEGER},
+            </if>
+            <if test="gooseWind != null">
+                #{gooseWind,jdbcType=INTEGER},
+            </if>
+            <if test="gooseStar != null">
+                #{gooseStar,jdbcType=INTEGER},
+            </if>
+            <if test="gooseDevil != null">
+                #{gooseDevil,jdbcType=INTEGER},
+            </if>
+            <if test="gooseRain != null">
+                #{gooseRain,jdbcType=INTEGER},
+            </if>
+            <if test="gooseMap != null">
+                #{gooseMap,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="GooseResultMap">
+        select * from tGoose where userId = #{userId}
+    </select>
+
+    <update id="updateById" parameterType="com.sillygoose.service.Model.Goose">
+        update tGoose set gooseENY = #{gooseENY}, gooseSun = #{gooseSun}, gooseRain = #{gooseRain},
+        gooseCloud = #{gooseCloud}, gooseStar = #{gooseStar}, gooseDevil = #{gooseDevil}, gooseWind = #{gooseWind}
+        where userId = #{userId}
+    </update>
+
+    <update id="updateBySelective" parameterType="com.sillygoose.service.Model.Goose">
+        update tgoose
+        <set>
+            <if test="gooseEny != null">
+                gooseENY = #{gooseEny,jdbcType=INTEGER},
+            </if>
+            <if test="gooseSun != null">
+                gooseSun = #{gooseSun,jdbcType=INTEGER},
+            </if>
+            <if test="gooseCloud != null">
+                gooseCloud = #{gooseCloud,jdbcType=INTEGER},
+            </if>
+            <if test="gooseWind != null">
+                gooseWind = #{gooseWind,jdbcType=INTEGER},
+            </if>
+            <if test="gooseStar != null">
+                gooseStar = #{gooseStar,jdbcType=INTEGER},
+            </if>
+            <if test="gooseDevil != null">
+                gooseDevil = #{gooseDevil,jdbcType=INTEGER},
+            </if>
+            <if test="gooseRain != null">
+                gooseRain = #{gooseRain,jdbcType=INTEGER},
+            </if>
+            <if test="gooseMap != null">
+                gooseMap = #{gooseMap,jdbcType=INTEGER},
+            </if>
+        </set>
+        where userId = #{userId,jdbcType=BIGINT}
+    </update>
+
 </mapper>
