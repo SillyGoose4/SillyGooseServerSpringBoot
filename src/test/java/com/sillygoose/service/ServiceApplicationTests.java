@@ -40,4 +40,15 @@ public class ServiceApplicationTests {
 
     }
 
+    @Test
+    public void testSearchService(){
+
+    }
+
+    @Test
+    public void testCreateService(){
+
+
+    }
+
 }

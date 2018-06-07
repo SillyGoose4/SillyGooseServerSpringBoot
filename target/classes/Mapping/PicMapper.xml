@@ -2,6 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sillygoose.service.Mapper.PicMapper">
     <resultMap id="PicResultMap" type="com.sillygoose.service.Model.Pic">
-
+        <id column="picId" jdbcType="INTEGER" property="picId" />
+        <result column="picUrl" jdbcType="CHAR" property="picUrl" />
+        <result column="picBelong" jdbcType="VARCHAR" property="picBelong" />
+        <result column="picLevel" jdbcType="CHAR" property="picLevel" />
+        <result column="picDescribe" jdbcType="VARCHAR" property="picDescribe" />
     </resultMap>
+
+    <insert id="insert" parameterType="com.sillygoose.service.Model.Pic">
+        insert into tPic(picUrl, picBelong, picLevel, picDescribe)
+        VALUES(#{picUrl}, #{picBelong}, #{picLevel}, #{picDescribe})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.sillygoose.service.Model.Pic">
+        insert into tPic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="picId != null">
+                picId,
+            </if>
+            <if test="picUrl != null">
+                picUrl,
+            </if>
+            <if test="picDescribe != null">
+                picDescribe,
+            </if>
+            <if test="picBelong != null">
+                picBelong,
+            </if>
+            <if test="picLevel != null">
+                picLevel,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="picId != null">
+                #{picId, jdbcType=INTEGER},
+            </if>
+            <if test="picUrl != null">
+                #{picUrl,jdbcType=CHAR},
+            </if>
+            <if test="picDescribe != null">
+                #{picDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="picBelong != null">
+                #{picBelong,jdbcType=VARCHAR},
+            </if>
+            <if test="picLevel != null">
+                #{picLevel,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="PicResultMap">
+        select * from tPic where picId = #{picId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByLevel" parameterType="java.lang.String" resultMap="PicResultMap">
+        select * from tPic where picLevel = #{picLevel,jdbcType=CHAR}
+    </select>
+
+    <select id="selectByBelong" parameterType="java.lang.String" resultMap="PicResultMap">
+        select * from tPic where picBelong = #{picBelong, jdbcType=VARCHAR}
+    </select>
+
 </mapper>

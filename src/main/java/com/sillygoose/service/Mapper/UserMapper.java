@@ -14,4 +14,8 @@ public interface UserMapper {
     User selectById(Integer userId);
 
     int selectCountByPhone(String userPhone);
+
+    User selectByPhoneOne(String userPhone);
+
+    int selectByPhoneForId(String userPasswd);
 }

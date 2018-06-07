@@ -9,6 +9,9 @@
     </resultMap>
 
     <insert id="createUser" parameterType="com.sillygoose.service.Model.User">
+        <selectKey resultType="java.lang.Integer" keyProperty="userId" order="AFTER">
+            select @@IDENTITY as userId
+        </selectKey>
         insert into tUser(userName,userPasswd,userPhone) VALUES (#{userName,jdbcType=VARCHAR},#{userPasswd,jdbcType=VARCHAR},#{userPhone,jdbcType=VARCHAR})
     </insert>
 
@@ -24,5 +27,12 @@
         select count(distinct userPhone) from tUser where userPhone = #{userPhone}
     </select>
 
+    <select id="selectByPhoneOne" parameterType="java.lang.String" resultMap="UserResultMap">
+        select * from tUser where userPhone = #{userPhone}
+    </select>
+
+    <select id="selectByPhoneForId" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select userId from tUser where userPhone = #{userPhone}
+    </select>
 
 </mapper>

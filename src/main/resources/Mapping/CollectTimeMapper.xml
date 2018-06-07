@@ -102,20 +102,18 @@
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
-    -->
-    <update id="updateByExample" parameterType="map">
+
+    <update id="updateById" parameterType="com.sillygoose.service.Model.CollectTime">
         update tCollectTime
-        set userId = #{record.userId,jdbcType=INTEGER},
+        set
         gooseSunT = #{record.sunLasttime,jdbcType=TIMESTAMP},
         gooseCloudT = #{record.cloudLasttime,jdbcType=TIMESTAMP},
         gooseRainT = #{record.rainLasttime,jdbcType=TIMESTAMP},
         gooseDevilT = #{record.devilLasttime,jdbcType=TIMESTAMP},
         gooseWindT = #{record.windLasttime,jdbcType=TIMESTAMP},
         gooseStarT = #{record.starLasttime,jdbcType=TIMESTAMP}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause" />
-        </if>
+        where userId = #{}
     </update>
-
+    -->
 
 </mapper>
