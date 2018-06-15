@@ -18,4 +18,8 @@ public interface UserMapper {
     User selectByPhoneOne(String userPhone);
 
     int selectByPhoneForId(String userPasswd);
+
+    int updateStatus(User record);
+
+    int updateSignInTime(User record);
 }

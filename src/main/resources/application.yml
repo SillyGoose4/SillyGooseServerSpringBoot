@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/SillyGoose?useSSL=false
+    url: jdbc:mysql://39.108.107.28:3306/SillyGoose?useSSL=false
     username: root
-    password: wjr.981125
+    password: SillyGoose4d.
     driver-class-name: com.mysql.jdbc.Driver
       #type: com.alibaba.druid.pool.DruidDataSource
     filters: stat

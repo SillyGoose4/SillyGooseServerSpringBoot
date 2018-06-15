@@ -13,16 +13,20 @@ public enum MessageBox {
     SI_NOTFIND("SignIn NotFind"),
     SI_PASSWORDWRONG("SignIn Password Wrong"),
     SI_ANOTHERPLACE("SignIn AnotherPlace"),
+    SI_ALREADYSIGNIN("Already SignIn"),
     /* -*- SignUp -* -*/
     SU_SUCCESS("SignUp Succcess"),
     SU_FAIL("SignUp Fail"),
     SU_NOTMATCH("SignUp NotMatch"),
     SU_EXISTS("SignUp User Already Exists"),
+    SO_SUCCESS("SignOut Success"),
     /* -*- System Error -*- */
     SYS_NETERR("System NetErr"),
-    SYS_MAINTAIN("System Maintain");
-
-
+    SYS_MAINTAIN("System Maintain"),
+    SYS_ERROR("System error"),
+    UG_SUCCESS("Update Goose Success"),
+    UC_SUCCESS("Update CollectTime Success"),
+    ;
     MessageBox(String message){
 
     }

@@ -90,4 +90,9 @@ public class CollectTime {
     public void setStarLasttime(Date starLasttime) {
         this.starLasttime = starLasttime;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

@@ -6,6 +6,8 @@
         <result column="userName" jdbcType="VARCHAR" property="userName" />
         <result column="userPasswd" jdbcType="VARCHAR" property="userPasswd" />
         <result column="userPhone" jdbcType="VARCHAR" property="userPhone" />
+        <result column="userStatus" jdbcType="INTEGER" property="userStatus"/>
+        <result column="lastSignIn" javaType="java.util.Date" jdbcType="TIMESTAMP" property="lastSignIn"/>
     </resultMap>
 
     <insert id="createUser" parameterType="com.sillygoose.service.Model.User">
@@ -34,5 +36,22 @@
     <select id="selectByPhoneForId" parameterType="java.lang.String" resultType="java.lang.Integer">
         select userId from tUser where userPhone = #{userPhone}
     </select>
+
+    <update id="updateStatus" parameterType="com.sillygoose.service.Model.User" >
+        update tUser
+        <set>
+            <if test="userStatus==1">
+                userStatus = 0
+            </if>
+            <if test="userStatus==0">
+                userStatus = 1
+            </if>
+        </set>
+        where userId = #{userId}
+    </update>
+
+    <update id="updateSignInTime" parameterType="com.sillygoose.service.Model.User" >
+        update tUser set LastSignIn = #{lastSignIn} where userId = #{userId}
+    </update>
 
 </mapper>

@@ -1,0 +1,24 @@
+GET http://localhost:8080/get/download?userId=9&picLevel=A&picBelong=华南
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-06-09T115948.500.json
+
+###
+
+GET http://localhost:8080/get/download?userId=9&picLevel=A&picBelong=华南
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-06-09T115902.500.json
+
+###
+
+GET http://localhost:8080/get/download
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-06-09T093656.200.txt
+
+###
+

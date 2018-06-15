@@ -5,9 +5,9 @@ public class Pic {
 
     private String picUrl;
 
-    private Integer picBelong;
+    private String picBelong;
 
-    private Integer picLevel;
+    private Character picLevel;
 
     private String picDescribe;
 
@@ -35,19 +35,19 @@ public class Pic {
         this.picUrl = picUrl == null ? null : picUrl.trim();
     }
 
-    public Integer getPicBelong() {
+    public String getPicBelong() {
         return picBelong;
     }
 
-    public void setPicBelong(Integer picBelong) {
+    public void setPicBelong(String picBelong) {
         this.picBelong = picBelong;
     }
 
-    public Integer getPicLevel() {
+    public Character getPicLevel() {
         return picLevel;
     }
 
-    public void setPicLevel(Integer picLevel) {
+    public void setPicLevel(Character picLevel) {
         this.picLevel = picLevel;
     }
 }

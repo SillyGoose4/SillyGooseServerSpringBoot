@@ -9,5 +9,6 @@ public interface CollectTimeMapper {
 
     CollectTime selectById(int userId);
 
-    //int update
+    int updateByOne(CollectTime record);
+
 }

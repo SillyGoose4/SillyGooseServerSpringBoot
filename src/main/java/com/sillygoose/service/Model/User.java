@@ -40,6 +40,10 @@ public class User {
 
     private String userPhone;
 
+    private Integer userStatus;
+
+    private Date lastSignIn;
+
 
     public Integer getUserId() {
         return userId;
@@ -73,4 +77,19 @@ public class User {
         this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
+    public Integer getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(Integer userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public Date getLastSignIn() {
+        return lastSignIn;
+    }
+
+    public void setLastSignIn(Date lastSignIn) {
+        this.lastSignIn = lastSignIn;
+    }
 }
