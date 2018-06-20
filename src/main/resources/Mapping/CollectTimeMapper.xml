@@ -3,12 +3,12 @@
 <mapper namespace="com.sillygoose.service.Mapper.CollectTimeMapper">
     <resultMap id="CollectTimeResultMap" type="com.sillygoose.service.Model.CollectTime">
         <result column="userId" jdbcType="INTEGER" property="userId" />
-        <result column="gooseSunT" jdbcType="TIMESTAMP" property="sunLasttime" />
-        <result column="gooseCloudT" jdbcType="TIMESTAMP" property="cloudLasttime" />
-        <result column="gooseRainT" jdbcType="TIMESTAMP" property="rainLasttime" />
-        <result column="gooseDevilT" jdbcType="TIMESTAMP" property="devilLasttime" />
-        <result column="gooseWindT" jdbcType="TIMESTAMP" property="windLasttime" />
-        <result column="gooseStarT" jdbcType="TIMESTAMP" property="starLasttime" />
+        <result column="gooseSunT" jdbcType="TIMESTAMP" property="sunLasttime" javaType="java.util.Date"/>
+        <result column="gooseCloudT" jdbcType="TIMESTAMP" property="cloudLasttime" javaType="java.util.Date"/>
+        <result column="gooseRainT" jdbcType="TIMESTAMP" property="rainLasttime" javaType="java.util.Date"/>
+        <result column="gooseDevilT" jdbcType="TIMESTAMP" property="devilLasttime" javaType="java.util.Date"/>
+        <result column="gooseWindT" jdbcType="TIMESTAMP" property="windLasttime" javaType="java.util.Date"/>
+        <result column="gooseStarT" jdbcType="TIMESTAMP" property="starLasttime" javaType="java.util.Date"/>
     </resultMap>
 
     <insert id="insert" parameterType="com.sillygoose.service.Model.CollectTime">
@@ -72,48 +72,41 @@
         select * from tCollectTime where userId = #{userId}
     </select>
 
-    <!-- 此处有错误
-    <update id="updateByExampleSelective" parameterType="map">
-        update tcollecttime
+    <update id="updateByOne" parameterType="com.sillygoose.service.Model.CollectTime">
+        update tCollectTime
         <set>
-            <if test="record.userId != null">
-                userId = #{record.userId,jdbcType=INTEGER},
+            <if test="sunLasttime != null">
+                gooseSunT= #{sunLasttime,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.sunLasttime != null">
-                gooseSunT= #{record.sunLasttime,jdbcType=TIMESTAMP},
+            <if test="cloudLasttime != null">
+                gooseCloudT = #{cloudLasttime,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.snowLasttime != null">
-                gooseCloudT = #{record.cloudLasttime,jdbcType=TIMESTAMP},
+            <if test="rainLasttime != null">
+                gooseRainT = #{rainLasttime,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.rainLasttime != null">
-                gooseRainT = #{record.rainLasttime,jdbcType=TIMESTAMP},
+            <if test="devilLasttime != null">
+                gooseDevilT = #{devilLasttime,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.devilLasttime != null">
-                gooseDevilT = #{record.devilLasttime,jdbcType=TIMESTAMP},
+            <if test="windLasttime != null">
+                gooseWindT = #{windLasttime,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.windLasttime != null">
-                gooseWindT = #{record.windLasttime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="record.starLasttime != null">
-                gooseStarT = #{record.starLasttime,jdbcType=TIMESTAMP},
+            <if test="starLasttime != null">
+                gooseStarT = #{starLasttime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause" />
-        </if>
+        where userId = #{userId}
     </update>
 
     <update id="updateById" parameterType="com.sillygoose.service.Model.CollectTime">
         update tCollectTime
         set
-        gooseSunT = #{record.sunLasttime,jdbcType=TIMESTAMP},
-        gooseCloudT = #{record.cloudLasttime,jdbcType=TIMESTAMP},
-        gooseRainT = #{record.rainLasttime,jdbcType=TIMESTAMP},
-        gooseDevilT = #{record.devilLasttime,jdbcType=TIMESTAMP},
-        gooseWindT = #{record.windLasttime,jdbcType=TIMESTAMP},
-        gooseStarT = #{record.starLasttime,jdbcType=TIMESTAMP}
-        where userId = #{}
+        gooseSunT = #{sunLasttime,jdbcType=TIMESTAMP},
+        gooseCloudT = #{cloudLasttime,jdbcType=TIMESTAMP},
+        gooseRainT = #{rainLasttime,jdbcType=TIMESTAMP},
+        gooseDevilT = #{devilLasttime,jdbcType=TIMESTAMP},
+        gooseWindT = #{windLasttime,jdbcType=TIMESTAMP},
+        gooseStarT = #{starLasttime,jdbcType=TIMESTAMP}
+        where userId = #{userId}
     </update>
-    -->
 
 </mapper>

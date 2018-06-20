@@ -1,6 +1,8 @@
 package com.sillygoose.service;
 
+import com.sillygoose.service.Mapper.CollectTimeMapper;
 import com.sillygoose.service.Mapper.UserMapper;
+import com.sillygoose.service.Model.CollectTime;
 import com.sillygoose.service.Model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -17,38 +20,28 @@ public class ServiceApplicationTests {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private CollectTimeMapper collectTimeMapper;
+
     @Test
     public void contextLoads() {
 
     }
-
+/*
     @Test
     public void testUserMapper(){
-        User user = new User("wjr","wjrwjr","18799137052");
-        //userMapper.createUser(user);
-        /*if(userMapper.createUser(user) != 0) {
-            System.out.println("Success");
-        }else{
-            System.out.println("failed");
-        }*/
-        List<User> userList = userMapper.selectByPhone(user.getUserPhone());
-        if(userList.isEmpty()){
-            userMapper.createUser(user);
-        }else{
-            //插入失败
-        }
+        User searchuser= userMapper.selectByPhoneOne("18051072519");
+        userMapper.updateStatus(searchuser);
 
     }
 
     @Test
-    public void testSearchService(){
-
-    }
-
-    @Test
-    public void testCreateService(){
-
-
-    }
+    public void testCollectTimeMapper(){
+        CollectTime collectTime = collectTimeMapper.selectById(9);
+        System.out.println(collectTime.getCloudLasttime());
+        collectTime.setCloudLasttime(new Date());
+        collectTimeMapper.updateByOne(collectTime);
+        System.out.println(collectTime.getCloudLasttime());
+    }*/
 
 }

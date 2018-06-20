@@ -3,7 +3,7 @@
 <mapper namespace="com.sillygoose.service.Mapper.GooseMapper">
     <resultMap id="GooseResultMap" type="com.sillygoose.service.Model.Goose">
         <id column="userId" jdbcType="INTEGER" property="userId" />
-        <result column="gooseENY" jdbcType="INTEGER" property="gooseEny" />
+        <result column="gooseEny" jdbcType="INTEGER" property="gooseEny" />
         <result column="gooseMap" jdbcType="INTEGER" property="gooseMap" />
         <result column="gooseSun" jdbcType="INTEGER" property="gooseSun" />
         <result column="gooseCloud" jdbcType="INTEGER" property="gooseCloud" />
@@ -13,7 +13,7 @@
         <result column="gooseDevil" jdbcType="INTEGER" property="gooseDevil" />
     </resultMap>
 
-    <insert id="insert" parameterType="com.sillygoose.service.Model.Goose">
+     <insert id="insert" parameterType="com.sillygoose.service.Model.Goose">
         insert into tGoose(userId,gooseENY,gooseSun,gooseRain,gooseCloud,gooseStar,gooseDevil,gooseWind)
          VALUES(#{userId},#{gooseEny},#{gooseSun},#{gooseRain},#{gooseCloud},#{gooseStar},#{gooseDevil},#{gooseWind})
     </insert>
@@ -85,7 +85,7 @@
     </select>
 
     <update id="updateById" parameterType="com.sillygoose.service.Model.Goose">
-        update tGoose set gooseENY = #{gooseENY}, gooseSun = #{gooseSun}, gooseRain = #{gooseRain},
+        update tGoose set gooseENY = #{gooseEny}, gooseSun = #{gooseSun}, gooseRain = #{gooseRain},
         gooseCloud = #{gooseCloud}, gooseStar = #{gooseStar}, gooseDevil = #{gooseDevil}, gooseWind = #{gooseWind}
         where userId = #{userId}
     </update>

@@ -1,5 +1,6 @@
 package com.sillygoose.service.Controller;
 
+import com.sillygoose.service.JsonDateValueProcessor;
 import com.sillygoose.service.Mapper.AlbumMapper;
 import com.sillygoose.service.Mapper.CollectTimeMapper;
 import com.sillygoose.service.Mapper.GooseMapper;
@@ -7,11 +8,13 @@ import com.sillygoose.service.Mapper.UserMapper;
 import com.sillygoose.service.Model.*;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +34,15 @@ public class PostController {
     @Autowired
     private AlbumMapper albumMapper;
 
+    Date lastSignInTime;
+
+    Date currentSignInTime;
+
+    /**
+     * 涉及登录、注册、退出登录
+     * @param message
+     * @return
+     */
     @RequestMapping("/post")
     public String get(@RequestBody String message){
         JSONObject json = JSONObject.fromObject(message);
@@ -52,10 +64,40 @@ public class PostController {
             case "SIGNUP":
                 res.put("Result",dealSignUp(json));
                 break;
+            case "SIGNOUT":
+                User temp = userMapper.selectByPhoneOne(json.getString("Phone"));
+                res.put("Result",MessageBox.SO_SUCCESS);
+                userMapper.updateStatus(temp);
+                break;
             default:
                 break;
         }
         return  res.toString();
+    }
+
+    /**
+     * 更新
+     * 涉及更新goose各个数据、collect time各个数据
+     * @param msg
+     * @return
+     */
+    @RequestMapping("/update")
+    public String update(@RequestBody String msg){
+        JSONObject data = JSONObject.fromObject(msg);
+        JSONObject result = new JSONObject();
+        switch (data.getString("Value")){
+            case "GOOSE":
+                if(dealUpdateGoose(data)){
+                    result.put("Result",MessageBox.UG_SUCCESS);
+                }else{
+                    result.put("Result",MessageBox.SYS_ERROR);
+                }
+                break;
+            case "COLLECTTIME":
+                result.put("Result",dealUpdateCollectTime(data));
+                break;
+        }
+        return result.toString();
     }
 
     /**
@@ -69,7 +111,16 @@ public class PostController {
         if(1 == userMapper.selectCountByPhone(msg.getString("Phone"))){
             User searchuser= userMapper.selectByPhoneOne(msg.getString("Phone"));
             if(msg.getString("Passwd").equals(searchuser.getUserPasswd())){
-                res = MessageBox.SI_SUCCESS;
+                if(searchuser.getUserStatus() == 0) {
+                    res = MessageBox.SI_SUCCESS;
+                    userMapper.updateStatus(searchuser);
+                    lastSignInTime = searchuser.getLastSignIn();
+                    currentSignInTime = new Date();
+                    searchuser.setLastSignIn(currentSignInTime);
+                    userMapper.updateSignInTime(searchuser);
+                }else{
+                    res = MessageBox.SI_ALREADYSIGNIN;
+                }
             }else{
                 res = MessageBox.SI_PASSWORDWRONG;
             }
@@ -117,6 +168,8 @@ public class PostController {
      * @return
      */
     private JSONObject dealSignInMsg(JSONObject msg){
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor());
         JSONObject temp = new JSONObject();
         User user;
         Goose goose;
@@ -125,14 +178,62 @@ public class PostController {
         int userId = 0;
         user = userMapper.selectByPhoneOne(msg.getString("Phone"));
         userId = user.getUserId();
-        temp.put("User",user);
+        temp.put("User",JSONObject.fromObject(user,jsonConfig));
         collectTime = collectTimeMapper.selectById(userId);
-        temp.put("CollectTime",collectTime);
+        temp.put("CollectTime",JSONObject.fromObject(collectTime,jsonConfig));
         goose = gooseMapper.selectById(userId);
-        temp.put("Goose",goose);
+        temp.put("Goose",JSONObject.fromObject(goose,jsonConfig));
         albumList = albumMapper.selectByUserId(userId);
         temp.put("Album",albumList);
         return temp;
     }
 
+    /*  Maybe it's like trash */
+    private boolean dealUpdateGoose(JSONObject msg){
+        Goose goose = new Goose();
+        goose.setGooseCloud(msg.getInt("gooseCloud"));
+        goose.setGooseWind(msg.getInt("gooseWind"));
+        goose.setGooseSun(msg.getInt("gooseSun"));
+        goose.setGooseStar(msg.getInt("gooseStar"));
+        goose.setGooseDevil(msg.getInt("gooseDevil"));
+        goose.setGooseRain(msg.getInt("gooseRain"));
+        goose.setGooseEny(msg.getInt("gooseEny"));
+        goose.setUserId(msg.getInt("userId"));
+        if(gooseMapper.updateById(goose) != 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private MessageBox dealUpdateCollectTime(JSONObject msg){
+        CollectTime collectTime = new CollectTime(msg.getInt("userId"));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        switch (msg.getString("One")){
+            case "Cloud":
+                collectTime.setCloudLasttime(date);
+                break;
+            case "Wind":
+                collectTime.setWindLasttime(date);
+                break;
+            case "Rain":
+                collectTime.setRainLasttime(date);
+                break;
+            case "Devil":
+                collectTime.setDevilLasttime(date);
+                break;
+            case "Sun":
+                collectTime.setSunLasttime(date);
+                break;
+            case "Star":
+                collectTime.setStarLasttime(date);
+                break;
+        }
+        if(collectTimeMapper.updateByOne(collectTime) != 0){
+            return MessageBox.UC_SUCCESS;
+        }else{
+            return MessageBox.SYS_ERROR;
+        }
+    }
 }

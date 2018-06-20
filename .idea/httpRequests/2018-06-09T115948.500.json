@@ -1,0 +1,7 @@
+{
+  "timestamp": "2018-06-09T15:59:48.642+0000",
+  "status": 500,
+  "error": "Internal Server Error",
+  "message": "nested exception is org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'userId' in 'class com.sillygoose.service.Model.Album'",
+  "path": "/get/download"
+}
